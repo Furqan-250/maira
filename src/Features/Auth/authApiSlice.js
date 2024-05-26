@@ -1,32 +1,32 @@
-import { apiSlice } from '../../App/api/apiSlice';
-import { setCredentials } from './AuthSlice';
+import { apiSlice } from "../../App/api/apiSlice";
+import { setCredentials } from "./AuthSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (credentials) => ({
-        url: 'auth/signup',
-        method: 'POST',
+        url: "auth/signup",
+        method: "POST",
         body: credentials,
       }),
     }),
 
-    // verifyAccount: builder.query({
-    //   query: ({ email, token }) => `auth/verifyaccount/${email}/${token}`,
-    // }),
+    verifyAccount: builder.query({
+      query: ({ email, token }) => `auth/verifyaccount/${email}/${token}`,
+    }),
 
     login: builder.mutation({
       query: (credentials) => ({
-        url: '/auth/login',
-        method: 'POST',
+        url: "/auth/login",
+        method: "POST",
         body: credentials,
       }),
     }),
 
     refresh: builder.mutation({
       query: () => ({
-        url: '/auth/refresh',
-        method: 'GET',
+        url: "/auth/refresh",
+        method: "GET",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
@@ -42,8 +42,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
     forgotPassword: builder.mutation({
       query: (email) => ({
-        url: '/auth/forgotpassword',
-        method: 'POST',
+        url: "/auth/forgotpassword",
+        method: "POST",
         body: email,
       }),
     }),
@@ -51,7 +51,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     updatePassword: builder.mutation({
       query: ({ _id, token, ...credentials }) => ({
         url: `/auth/resetpassword/${_id}/${token}`,
-        method: 'POST',
+        method: "POST",
         body: credentials,
       }),
     }),
